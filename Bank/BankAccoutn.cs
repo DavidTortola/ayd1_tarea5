@@ -71,5 +71,18 @@ namespace BankAccountNS
 
             m_balance += amount;
         }
+
+        public void Ahorro(double amount, int time)
+        {
+            if (amount <= 0)
+            {
+                throw new ArgumentOutOfRangeException("amount");
+            }
+            if (time <= 0)
+            {
+                throw new ArgumentOutOfRangeException("time");
+            }
+            m_balance += amount * Math.Pow(1 + 0.05, time);
+        }
     }
 }
