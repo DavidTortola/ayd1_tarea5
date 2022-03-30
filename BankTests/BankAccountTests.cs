@@ -82,5 +82,19 @@ namespace BankTests
                 Assert.AreEqual(expected, actual, 0.01, "El ahorro no se efectuo con exito para " + nombres[i]);
             }
         }
+
+        [TestMethod]
+        public void PruebaUnitaria()
+        {
+            // Error por tiempo menor a 0
+            double beginningBalance = 100.00;
+            BankAccount account = new BankAccount("Mr. Bryan Walton", beginningBalance);
+            double amount = 20.00;
+            int time = -5;
+            double expected = beginningBalance + (amount * System.Math.Pow(1 + 0.05, time));
+            account.Ahorro(amount, time);
+
+            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Ahorro(amount, time));
+        }
     }
 }
