@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BankAccountNS;
+using System;
 
 namespace BankTests
 {
@@ -40,6 +41,20 @@ namespace BankTests
 
             // Act and assert
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(debitAmount));
+        }
+        
+        [TestMethod]
+        public void Prueba_Funcional()
+        {
+            //Prueba de cordura
+            double beginningBalance = 100.00;
+            BankAccount account = new BankAccount("Mr. Bryan Walton", beginningBalance);
+            double amount = 20.00;
+            int time = 5;
+            double expected = beginningBalance + (amount * System.Math.Pow(1 + 0.05, time));
+            account.Ahorro(amount, time);
+            double actual = account.Balance;
+            Assert.AreEqual(expected, actual, 0.01, "El ahorro no se efectuo con exito");
         }
     }
 }
